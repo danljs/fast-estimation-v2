@@ -7,25 +7,19 @@ import {post_message, add} from '../actions/index'
 class quote extends React.Component{
   constructor(props) {
     super(props)
-    this.state = {
-      rows: [],
-      category: [],
-      summary: 0.00
-    }
+    this.state = {}
   }
 
   render() {
     const { dispatch, ui, lang } = this.props
-    let lang_keys = lang.keys
     let rows = ui.rows||[]
-    let category = ui.category
-    let titles = category.map((c,i)=>c[lang_keys.item_name])
+    let titles = ui.category.map((c,i)=>c[lang.item_name])
     return (
       <div className='quote'>
         <div></div>
         <div className='row header'>
           <div className='add' onClick={e => dispatch(add())}/>
-          <input className='new-todo' placeholder={lang_keys.what}/>
+          <input className='new-todo' placeholder={lang.what}/>
           <div className='print' onClick={e => dispatch(post_message({type:'print-request',data:'print'}))}/>
         </div>
         <section className='main'><ul>
@@ -33,24 +27,11 @@ class quote extends React.Component{
           {
             titles.map((c,i)=><div key={i} className={'item' + i}>{c}</div>)
           }
-          <div className='quatity'>{lang_keys.quatity}</div>
-          <div className='amount'>{lang_keys.amount}</div>
+          <div className='quatity'>{lang.quatity}</div>
+          <div className='amount'>{lang.amount}</div>
           </li>
           {
-            rows.map((c,i)=>
-              <QuoteRow key={i} 
-                value={c}
-                category={category} 
-                onChange={value=>{
-                  rows[i] = value
-                  this.setState({rows: rows})
-                }}
-                remove={e=>{
-                  rows.splice(i,1)
-                  this.setState({rows: rows})
-                }}
-              />
-            )
+            rows.map((c,i) => <QuoteRow key={i} row_num={i}/>)
           }
         </ul></section>
         <div className='footer'>
@@ -59,7 +40,7 @@ class quote extends React.Component{
             .map((c,i)=>!!!c.amount ? 0 : parseFloat(c.amount))
             .reduce((p,c) => p + c, 0) * 100) / 100).toFixed(2)
           }</div>
-          <div>{lang_keys.summary}:</div>
+          <div>{lang.summary}:</div>
         </div>
       </div>
     )

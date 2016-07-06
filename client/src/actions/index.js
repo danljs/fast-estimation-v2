@@ -38,7 +38,6 @@ export let receive_message = (message) => {
       default:
     }
   }
-  // return {type: RECEIVE_MESSAGE,message}
 }
 
 export let initial = category => {
@@ -47,8 +46,8 @@ export let initial = category => {
 export let add = () => {
     return {type: ADD}
 }
-export let remove = () => {
-    return {type: REMOVE}
+export let remove = (row_num) => {
+    return {type: REMOVE, row_num}
 }
 export let print = data => {
     return {type: PRINT, data}

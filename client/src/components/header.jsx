@@ -11,7 +11,7 @@ class header extends React.Component{
 
   }
   render() {
-    let lang = this.props.lang.keys
+    const { dispatch, lang } = this.props
     return (
       <div className='header-area'>
       {/*
@@ -25,7 +25,7 @@ class header extends React.Component{
         }}>{lang.quote}</a>
       */}
         <a onClick={e=>{
-          this.props.dispatch(change_lang(lang.change_id))
+          dispatch(change_lang(lang.change_id))
         }}>{lang.name}</a>
       </div>
     )

@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import QuoteCell from './quote_cell'
+import {remove} from '../actions/index'
 
 class quote_row extends React.Component{
   constructor(props) {
@@ -12,12 +13,6 @@ class quote_row extends React.Component{
       amount: 0
     }
   }
-
-  componentWillMount() {}
-
-  componentWillReceiveProps(nextProps) {}
-
-  componentDidMount() {}
 
   update_row(items, quatity) {
     let row = {
@@ -32,18 +27,13 @@ class quote_row extends React.Component{
   }
 
   render() {
-    let lang = this.props.lang.keys
-    console.log(this.props.value)
+    const { dispatch, ui, row_num } = this.props
     return (
       <li className='row'>
       {
-        this.props.category.map((c,i)=>
+        ui.category.map((c,i)=>
           <div key={i} className={'item' + i}>
-            <QuoteCell subs={c.sub} value={this.props.value.items[i]} change={e=>{
-              let items = this.state.items
-              items[i] = e
-              this.update_row(items, this.state.quatity)
-            }}/>
+            <QuoteCell subs={c.sub} row_num={row_num} col_num={i}/>
           </div>
         )
       }
@@ -52,9 +42,9 @@ class quote_row extends React.Component{
           onChange={e=>{this.update_row(this.state.items, e.target.value)}}/>
       </div>
       <div className='amount'>{this.state.amount}</div>
-      <div className='delete' onClick={e=>this.props.remove()}></div>
+      <div className='delete' onClick={e => dispatch(remove(row_num))}/>
       </li>
     )
   }
 }
-export default connect(state => ({lang: state.lang}))(quote_row)
+export default connect(state => ({ui: state.ui}))(quote_row)

@@ -19,7 +19,9 @@ export default (state = initialState, action) => {
       return new_state
 
     case REMOVE:
-      return state
+      let _state = Object.assign({}, state)
+      _state.rows.splice(action.row_num, 1)
+      return _state
 
     case PRINT:
       let url = window.URL.createObjectURL(new Blob([

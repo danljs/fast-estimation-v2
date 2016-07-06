@@ -11,19 +11,19 @@ class quote_cell extends React.Component{
   }
 
   render() {
-    var lang = this.props.lang.keys
-    var subs = this.props.subs
-    var value = !!!this.props.value ?  '0:' : this.props.value.price + ':' + this.props.value.item_name
+    const { dispatch, ui, lang, subs, row_num, col_num } = this.props
+    let value = ui.rows[row_num].items[col_num].item_name
+    // value = !!!value ?  '0:' : value.price + ':' + value.item_name
     //multi select:
     //http://jsfiddle.net/chirayu45/yxkut/16/
-    console.log(this.props.value)
+    // console.log(this.props.value)
     return (
-      <select className={!!!this.state.value?'error':''} value={value} onChange={e=>{
+      <select className={!!!value?'error':''} value={value} onChange={e=>{
         let value = e.target.value.split(':')
         this.setState({value : value})
         this.props.change({price : value[0], item_name : value[1]})
       }}>
-        <option value={'0:'} disabled='disabled'></option>
+        <option value='' disabled='disabled'></option>
         {
           subs.map((c,i)=>
             !!!c.sub ?
@@ -38,4 +38,4 @@ class quote_cell extends React.Component{
     )
   }
 }
-export default connect(state => ({lang: state.lang}))(quote_cell)
+export default connect(state => ({lang: state.lang, ui: state.ui}))(quote_cell)
