@@ -8,8 +8,6 @@ export const CONNECTING = 'CONNECTING'
 export const CONNECTED =  'CONNECTED'
 export const ERROR =  'ERROR'
 
-export const CHECK =  'CHECK'
-export const CHECKTED = 'CHECKTED'
 export const INITIAL = 'INITIAL'
 export const ADD = 'ADD'
 export const REMOVE = 'REMOVE'
@@ -41,14 +39,6 @@ export let receive_message = (message) => {
     }
   }
   // return {type: RECEIVE_MESSAGE,message}
-}
-
-export let check = () => {
-    return {type: CHECK}
-}
-
-export let checked = (status) => {
-    return {type: CHECKTED, status}
 }
 
 export let initial = category => {

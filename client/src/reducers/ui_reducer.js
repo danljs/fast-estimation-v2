@@ -1,31 +1,42 @@
 'use strict'
-import { CHECK, CHECKTED, INITIAL, ADD, REMOVE, PRINT} from '../actions/index'
+import { INITIAL, ADD, REMOVE, PRINT} from '../actions/index'
 
 const initialState = {
-  rows: [],
-  checked: false
+  category: [],
+  rows: []
 }
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CHECK:
-      return {type: 'check'}
-    case CHECKTED:
-      return {type: 'checked'}
     case INITIAL:
       return {
         category: action.category,
         rows: [new_row(action.category.length)]
       }
+
     case ADD:
-      let a = Object.assign({}, state)
-      a.rows.push(new_row(a.category.length))
-      return a
+      let new_state = Object.assign({}, state)
+      new_state.rows.push(new_row(state.category.length))
+      return new_state
+
     case REMOVE:
-      return {type: 'checked'}
+      return state
+
     case PRINT:
-      return {type: 'checked'}
+      let url = window.URL.createObjectURL(new Blob([
+        new Uint8Array(action.data)
+        ],{type: "application/octet-stream"}));
+
+      let b = document.createElement('a')
+      b.href = url
+      b.download = 'testtest.pdf'
+      b.style.display = 'none'
+      document.body.appendChild(b)
+      b.click()
+      document.body.removeChild(b)
+      window.URL.revokeObjectURL(url);
+
     default:
-      return {}
+      return state
   }
 }
 
