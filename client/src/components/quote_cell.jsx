@@ -12,22 +12,21 @@ class quote_cell extends React.Component{
   render() {
     const { dispatch, ui, lang, subs, row_num, col_num } = this.props
     let value = ui.rows[row_num].items[col_num]
-    value = !!!value.price ?  '' : value.price + ':' + value.item_name
+    value = !!!value.item_id ?  '' : value
     //multi select:
     //http://jsfiddle.net/chirayu45/yxkut/16/
     return (
-      <select className={!!!value?'error':''} value={value} onChange={e=>{
-        let value = e.target.value.split(':')
-        dispatch(select(row_num, col_num, {price : value[0], item_name : value[1]}))
-      }}>
-        <option value='' disabled='disabled'></option>
+      <select className={!!!value ? 'error' : ''} value={JSON.stringify(value)} onChange={
+        e => dispatch(select(row_num, col_num, JSON.parse(e.target.value)))
+      }>
+        <option value={JSON.stringify('')} disabled='disabled'></option>
         {
           subs.map((c,i)=>
             !!!c.sub ?
-            <option key={i} value={c.price + ':' + c[lang.item_name]}>{c[lang.item_name]}</option>
+            <option key={i} value={JSON.stringify(c)}>{c[lang.item_name]}</option>
             :
             <optgroup key={i} label={c[lang.item_name]}>
-              {c.sub.map((s,j)=><option key={j} value={s.price + ':' + s[lang.item_name]}>{s[lang.item_name]}</option>)}
+              {c.sub.map((s,j)=><option key={j} value={JSON.stringify(s)}>{s[lang.item_name]}</option>)}
             </optgroup>
           )
         }

@@ -1,5 +1,5 @@
 'use strict'
-import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT} from '../actions/index'
+import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD} from '../actions/index'
 
 const initialState = {
   category: [],
@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
       new_state.rows[action.row_num].amount = update_row(new_state.rows[action.row_num])
       return new_state
 
-    case PRINT:
+    case DOWNLOAD:
       let url = window.URL.createObjectURL(new Blob([
         new Uint8Array(action.data)
         ],{type: "application/octet-stream"}));
@@ -64,7 +64,7 @@ let new_row = length => {
   }
 }
 
-let update_row = (row) => 
+let update_row = row => 
   parseFloat(Math.round(row.quatity * row.items
             .map((c,i)=>!!!c.price ? 0 : parseFloat(c.price))
             .reduce((p,c)=>p + c, 0) * 100) / 100).toFixed(2)

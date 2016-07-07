@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import QuoteRow from './quote_row'
-import {post_message, add} from '../actions/index'
+import {print, add} from '../actions/index'
 
 class quote extends React.Component{
   constructor(props) {
@@ -20,7 +20,7 @@ class quote extends React.Component{
         <div className='row header'>
           <div className='add' onClick={e => dispatch(add())}/>
           <input className='new-todo' placeholder={lang.what}/>
-          <div className='print' onClick={e => dispatch(post_message({type:'print-request',data:'print'}))}/>
+          <div className='print' onClick={e => dispatch(print('print'))}/>
         </div>
         <section className='main'><ul>
           <li className='row title'>
@@ -46,7 +46,7 @@ class quote extends React.Component{
     )
   }
 }
-export default connect(any => any)(quote)
+export default connect(state => ({lang: state.lang, ui: state.ui}))(quote)
 
 // some test code 
 // componentDidMount(){
