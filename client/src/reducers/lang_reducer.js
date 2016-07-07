@@ -13,7 +13,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_LANG:
     	localStorage.setItem('langs', action.lang)
-      debugger
       return langs[action.lang]
     default:
       return state

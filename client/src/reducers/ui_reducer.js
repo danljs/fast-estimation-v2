@@ -1,11 +1,13 @@
 'use strict'
-import { INITIAL, ADD, REMOVE, PRINT} from '../actions/index'
+import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT} from '../actions/index'
 
 const initialState = {
   category: [],
   rows: []
 }
 export default (state = initialState, action) => {
+  let new_state = {}
+
   switch (action.type) {
     case INITIAL:
       return {
@@ -14,14 +16,27 @@ export default (state = initialState, action) => {
       }
 
     case ADD:
-      let new_state = Object.assign({}, state)
+      new_state = Object.assign({}, state)
       new_state.rows.push(new_row(state.category.length))
       return new_state
 
     case REMOVE:
-      let _state = Object.assign({}, state)
-      _state.rows.splice(action.row_num, 1)
-      return _state
+      new_state = Object.assign({}, state)
+      new_state.rows.splice(action.row_num, 1)
+      return new_state
+
+    case SELECT:
+      new_state = Object.assign({}, state)
+      new_state.rows[action.row_num].items[action.col_num] = action.value
+      new_state.rows[action.row_num].amount = update_row(new_state.rows[action.row_num])
+      
+      return new_state
+
+    case INPUT:
+      new_state = Object.assign({}, state)
+      new_state.rows[action.row_num].quatity = action.value
+      new_state.rows[action.row_num].amount = update_row(new_state.rows[action.row_num])
+      return new_state
 
     case PRINT:
       let url = window.URL.createObjectURL(new Blob([
@@ -36,7 +51,6 @@ export default (state = initialState, action) => {
       b.click()
       document.body.removeChild(b)
       window.URL.revokeObjectURL(url);
-
     default:
       return state
   }
@@ -49,3 +63,14 @@ let new_row = length => {
     amount: 0
   }
 }
+
+let update_row = (row) => 
+  parseFloat(Math.round(row.quatity * row.items
+            .map((c,i)=>!!!c.price ? 0 : parseFloat(c.price))
+            .reduce((p,c)=>p + c, 0) * 100) / 100).toFixed(2)
+
+let update_sum = rows => 
+  parseFloat(Math.round(rows
+            .map((c,i)=>!!!c.amount ? 0 : parseFloat(c.amount))
+            .reduce((p,c) => p + c, 0) * 100) / 100).toFixed(2)
+

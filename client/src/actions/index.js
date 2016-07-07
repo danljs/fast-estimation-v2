@@ -12,6 +12,8 @@ export const INITIAL = 'INITIAL'
 export const ADD = 'ADD'
 export const REMOVE = 'REMOVE'
 export const PRINT = 'PRINT'
+export const SELECT = 'SELECT'
+export const INPUT = 'INPUT'
 
 export let change_lang = lang => {
   return {type: CHANGE_LANG, lang}
@@ -51,4 +53,10 @@ export let remove = (row_num) => {
 }
 export let print = data => {
     return {type: PRINT, data}
+}
+export let select = (row_num, col_num, value) => {
+    return {type: SELECT, row_num, col_num, value}
+}
+export let input = (row_num, value) => {
+    return {type: INPUT, row_num, value}
 }
