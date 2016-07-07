@@ -12,34 +12,28 @@ class quote extends React.Component{
 
   render() {
     const { dispatch, ui, lang } = this.props
-    let rows = ui.rows||[]
-    let titles = ui.category.map((c,i)=>c[lang.item_name])
     return (
       <div className='quote'>
         <div></div>
         <div className='row header'>
           <div className='add' onClick={e => dispatch(add())}/>
           <input className='new-todo' placeholder={lang.what}/>
-          <div className='print' onClick={e => dispatch(print('print'))}/>
+          <div className='print' onClick={e => dispatch(print())}/>
         </div>
         <section className='main'><ul>
           <li className='row title'>
           {
-            titles.map((c,i)=><div key={i} className={'item' + i}>{c}</div>)
+            ui.category.map((c,i)=><div key={i} className={'item' + i}>{c[lang.item_name]}</div>)
           }
           <div className='quatity'>{lang.quatity}</div>
           <div className='amount'>{lang.amount}</div>
           </li>
           {
-            rows.map((c,i) => <QuoteRow key={i} row_num={i}/>)
+            ui.rows.map((c,i) => <QuoteRow key={i} row_num={i}/>)
           }
         </ul></section>
         <div className='footer'>
-          <div>{
-            parseFloat(Math.round(rows
-            .map((c,i)=>!!!c.amount ? 0 : parseFloat(c.amount))
-            .reduce((p,c) => p + c, 0) * 100) / 100).toFixed(2)
-          }</div>
+          <div>{ui.summary}</div>
           <div>{lang.summary}:</div>
         </div>
       </div>

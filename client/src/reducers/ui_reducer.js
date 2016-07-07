@@ -3,7 +3,8 @@ import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD} from '../actions/
 
 const initialState = {
   category: [],
-  rows: []
+  rows: [],
+  summary: 0
 }
 export default (state = initialState, action) => {
   let new_state = {}
@@ -23,19 +24,21 @@ export default (state = initialState, action) => {
     case REMOVE:
       new_state = Object.assign({}, state)
       new_state.rows.splice(action.row_num, 1)
+      new_state.summary = update_sum(new_state.rows)
       return new_state
 
     case SELECT:
       new_state = Object.assign({}, state)
       new_state.rows[action.row_num].items[action.col_num] = action.value
       new_state.rows[action.row_num].amount = update_row(new_state.rows[action.row_num])
-      
+      new_state.summary = update_sum(new_state.rows)
       return new_state
 
     case INPUT:
       new_state = Object.assign({}, state)
       new_state.rows[action.row_num].quatity = action.value
       new_state.rows[action.row_num].amount = update_row(new_state.rows[action.row_num])
+      new_state.summary = update_sum(new_state.rows)
       return new_state
 
     case DOWNLOAD:
@@ -56,13 +59,11 @@ export default (state = initialState, action) => {
   }
 }
 
-let new_row = length => {
-  return { 
-    items: Array.apply(null,{length: length}).map(() => ({price : 0, item_name : ''})),
+let new_row = length => ({
+    items: Array.apply(null,{length: length}).map(() => ({})),
     quatity: 1,
     amount: 0
-  }
-}
+})
 
 let update_row = row => 
   parseFloat(Math.round(row.quatity * row.items

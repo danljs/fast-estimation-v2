@@ -12,14 +12,12 @@ class quote_cell extends React.Component{
   render() {
     const { dispatch, ui, lang, subs, row_num, col_num } = this.props
     let value = ui.rows[row_num].items[col_num]
-    value = !!!value.item_id ?  '' : value
-    //multi select:
+    //multi-level select:
     //http://jsfiddle.net/chirayu45/yxkut/16/
     return (
-      <select className={!!!value ? 'error' : ''} value={JSON.stringify(value)} onChange={
-        e => dispatch(select(row_num, col_num, JSON.parse(e.target.value)))
-      }>
-        <option value={JSON.stringify('')} disabled='disabled'></option>
+      <select className={ !!!value.item_id ? 'error' : ''} value={JSON.stringify(value)} 
+        onChange={ e => dispatch(select(row_num, col_num, JSON.parse(e.target.value)))}>
+        <option value={JSON.stringify({})} disabled='disabled'></option>
         {
           subs.map((c,i)=>
             !!!c.sub ?
