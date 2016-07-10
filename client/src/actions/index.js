@@ -32,10 +32,19 @@ export let initial = category => ({type: INITIAL, category})
 export let add = () => ({type: ADD})
 export let remove = row_num => ({type: REMOVE, row_num})
 export let print = () => (dispatch, getState) => {
-  getState().ui.rows.filter(c => c.items.filter(d => !!!d.item_id).length > 0).length > 0 ? 
-  alert(getState().lang['please_input'])
-  :
-  dispatch(post_message({type:'print-request',data : getState().ui}))
+  let ui = getState().ui
+  let lang = getState().lang
+  if(ui.rows.filter(c => c.items.filter(d => !!!d.item_id).length > 0).length > 0){
+    alert(lang['please_input'])
+    return
+  }
+
+  dispatch(post_message({type:'print-request',data : {
+    title : [...ui.category.map(c => c[lang.item_name]), lang.quatity, lang.amount],
+    body : ui.rows.map(c => [...c.items.map(d => d[lang.item_name]), c.quatity + '', c.amount]),
+    summary: ui.summary
+  }}))
+
 }
 export let download = data => ({type: DOWNLOAD, data})
 export let select = (row_num, col_num, value) => ({type: SELECT, row_num, col_num, value})

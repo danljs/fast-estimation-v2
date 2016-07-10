@@ -31,12 +31,8 @@ module.exports = ( () => {
             style: 'tableExample',
             table: {
               body: [
-                [
-                  { text: 'Column 1', style: 'tableHeader', alignment: 'center' },
-                  { text: 'Column 2', style: 'tableHeader', alignment: 'center' },
-                  { text: 'Column 3', style: 'tableHeader', alignment: 'center' }
-                ],
-                ['One value goes here王', 'Another one here王', 'OK王?']
+                data.title.map(c => ({ text: c, style: 'tableHeader', alignment: 'center' })), 
+                ...data.body
               ]
             }
           },
