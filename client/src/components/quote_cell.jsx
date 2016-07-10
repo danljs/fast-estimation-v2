@@ -1,7 +1,8 @@
 'use strict'
 import React from 'react'
 import { connect } from 'react-redux'
-import {select} from '../actions/index'
+import { bindActionCreators } from 'redux'
+import * as Actions from '../actions'
 
 class quote_cell extends React.Component{
   constructor(props) {
@@ -10,13 +11,13 @@ class quote_cell extends React.Component{
   }
 
   render() {
-    const { dispatch, ui, lang, subs, row_num, col_num } = this.props
+    const { ui, lang, subs, row_num, col_num, actions } = this.props
     let value = ui.rows[row_num].items[col_num]
     //multi-level select:
     //http://jsfiddle.net/chirayu45/yxkut/16/
     return (
       <select className={ !!!value.item_id ? 'error' : ''} value={JSON.stringify(value)} 
-        onChange={ e => dispatch(select(row_num, col_num, JSON.parse(e.target.value)))}>
+        onChange={ e => actions.select(row_num, col_num, JSON.parse(e.target.value))}>
         <option value={JSON.stringify({})} disabled='disabled'></option>
         {
           subs.map((c,i)=>
@@ -32,4 +33,16 @@ class quote_cell extends React.Component{
     )
   }
 }
-export default connect(state => ({lang: state.lang, ui: state.ui}))(quote_cell)
+let mapStateToProps = state =>({
+  lang: state.lang,
+  ui: state.ui
+})
+
+let mapDispatchToProps = dispatch =>({
+  actions: bindActionCreators(Actions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(quote_cell)

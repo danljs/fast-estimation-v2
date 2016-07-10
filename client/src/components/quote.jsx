@@ -1,8 +1,9 @@
 'use strict'
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import QuoteRow from './quote_row'
-import {print, add} from '../actions/index'
+import * as Actions from '../actions'
 
 class quote extends React.Component{
   constructor(props) {
@@ -11,14 +12,14 @@ class quote extends React.Component{
   }
 
   render() {
-    const { dispatch, ui, lang } = this.props
+    const {ui, lang, actions} = this.props
     return (
       <div className='quote'>
         <div></div>
         <div className='row header'>
-          <div className='add' onClick={e => dispatch(add())}/>
+          <div className='add' onClick={e => actions.add()}/>
           <input className='new-todo' placeholder={lang.what}/>
-          <div className='print' onClick={e => dispatch(print())}/>
+          <div className='print' onClick={e => actions.print()}/>
         </div>
         <section className='main'><ul>
           <li className='row title'>
@@ -40,7 +41,22 @@ class quote extends React.Component{
     )
   }
 }
-export default connect(state => ({lang: state.lang, ui: state.ui}))(quote)
+
+let mapStateToProps = state =>({
+  lang: state.lang,
+  ui: state.ui
+})
+
+let mapDispatchToProps = dispatch =>({
+  actions: bindActionCreators(Actions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(quote)
+
+// export default connect(state => ({lang: state.lang, ui: state.ui}))(quote)
 
 // some test code 
 // componentDidMount(){

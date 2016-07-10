@@ -1,7 +1,8 @@
 'use strict'
 import React from 'react'
 import { connect } from 'react-redux'
-import {change_lang} from '../actions/index'
+import { bindActionCreators } from 'redux'
+import * as Actions from '../actions'
 
 class header extends React.Component{
   constructor(props) {
@@ -11,25 +12,23 @@ class header extends React.Component{
 
   }
   render() {
-    const { dispatch, lang } = this.props
+    const { lang, actions } = this.props
     return (
       <div className='header-area'>
-      {/*
-        <a onClick={e=>{
-        }}>{lang.logout}</a>
-        <a onClick={e=>{
-          this.context.router.push('/admin')
-        }}>{lang.admin}</a>
-        <a onClick={e=>{
-          this.context.router.push('/quote')
-        }}>{lang.quote}</a>
-      */}
-        <a onClick={e=>{
-          dispatch(change_lang(lang.change_id))
-        }}>{lang.name}</a>
+        <a onClick={e=>actions.change_lang(lang.change_id)}>{lang.name}</a>
       </div>
     )
   }
 }
+let mapStateToProps = state =>({
+  lang: state.lang
+})
 
-export default connect(state => ({lang: state.lang}))(header)
+let mapDispatchToProps = dispatch =>({
+  actions: bindActionCreators(Actions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(header)

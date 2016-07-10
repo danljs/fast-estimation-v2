@@ -2,7 +2,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import QuoteCell from './quote_cell'
-import {remove, input} from '../actions/index'
+import { bindActionCreators } from 'redux'
+import * as Actions from '../actions'
 
 class quote_row extends React.Component{
   constructor(props) {
@@ -11,7 +12,7 @@ class quote_row extends React.Component{
   }
 
   render() {
-    const { dispatch, ui, row_num } = this.props
+    const { ui, row_num, actions } = this.props
     return (
       <li className='row'>
       {
@@ -23,12 +24,24 @@ class quote_row extends React.Component{
       }
       <div className='quatity'>
         <input type='number' step='1' min='1' max='99' value={ui.rows[row_num].quatity} 
-          onChange={e => dispatch(input(row_num, e.target.value))}/>
+          onChange={e => actions.input(row_num, e.target.value)}/>
       </div>
       <div className='amount'>{ui.rows[row_num].amount}</div>
-      <div className='delete' onClick={e => dispatch(remove(row_num))}/>
+      <div className='delete' onClick={e => actions.remove(row_num)}/>
       </li>
     )
   }
 }
-export default connect(state => ({ui: state.ui}))(quote_row)
+let mapStateToProps = state =>({
+  lang: state.lang,
+  ui: state.ui
+})
+
+let mapDispatchToProps = dispatch =>({
+  actions: bindActionCreators(Actions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(quote_row)
