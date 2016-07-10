@@ -16,5 +16,6 @@ module.exports = {
 	summary: '总额',
 	item_name: 'item_name_c',
 	what:'您需要什么?',
-	select: '选择...'
+	select: '选择...',
+	please_input: '请选择所有条目。'
 }

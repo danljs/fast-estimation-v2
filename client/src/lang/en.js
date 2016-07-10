@@ -17,5 +17,6 @@ module.exports = {
 	summary: 'Summary',
 	item_name: 'item_name_e',
 	what: 'What needs to be done?',
-	select: 'Select...'
+	select: 'Select...',
+	please_input: 'please select all of items.'
 }

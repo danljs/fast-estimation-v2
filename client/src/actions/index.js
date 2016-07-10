@@ -32,7 +32,9 @@ export let initial = category => ({type: INITIAL, category})
 export let add = () => ({type: ADD})
 export let remove = row_num => ({type: REMOVE, row_num})
 export let print = () => (dispatch, getState) => {
-  //valication here
+  getState().ui.rows.filter(c => c.items.filter(d => !!!d.item_id).length > 0).length > 0 ? 
+  alert(getState().lang['please_input'])
+  :
   dispatch(post_message({type:'print-request',data : getState().ui}))
 }
 export let download = data => ({type: DOWNLOAD, data})
