@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../actions'
+import {withRouter} from 'react-router'
 
 class header extends React.Component{
   constructor(props) {
@@ -12,10 +13,12 @@ class header extends React.Component{
 
   }
   render() {
-    const { lang, actions } = this.props
+    const { lang, actions, router } = this.props
     return (
       <div className='header-area'>
-        <a onClick={e=>actions.change_lang(lang.change_id)}>{lang.name}</a>
+        <a onClick={e => actions.change_lang(lang.change_id)}>{lang.name}</a>
+        <a onClick={e => router.push('/admin')}>{lang.admin}</a>
+        <a onClick={e => router.push('/quote')}>{lang.quote}</a>
       </div>
     )
   }
@@ -31,4 +34,4 @@ let mapDispatchToProps = dispatch =>({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(header)
+)(withRouter(header))

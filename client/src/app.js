@@ -8,6 +8,7 @@ import { createHashHistory } from 'history'
 
 import Header from './components/header'
 import quote from './components/quote'
+import admin from './components/admin'
 import store from './store'
 
 class app extends React.Component{
@@ -28,6 +29,7 @@ render(
         <Route path="/" component={app}>
           <IndexRoute component={quote} />
           <Route path="quote" component={quote}/>
+          <Route path="admin" component={admin}/>
         </Route>
       </Router>
     </Provider>,
