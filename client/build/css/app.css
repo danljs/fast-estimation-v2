@@ -171,11 +171,10 @@
   margin: 0px 20px 0px 0px;
 }
 .admin {
-  top: 0;
-  height: 100%;
+  top: 50px;
+  bottom: 0px;
   width: 100%;
   position: absolute;
-  padding-top: 50px;
 }
 .admin .tree-area {
   height: 98%;
@@ -252,5 +251,8 @@
   position: absolute;
   top: 50px;
   left: 300px;
-  padding: 100px;
+  padding: 30px;
+}
+.admin .edit-area a {
+  float: right;
 }

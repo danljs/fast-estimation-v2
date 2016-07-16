@@ -1,5 +1,5 @@
 'use strict'
-import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD} from '../actions/index'
+import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD, UPDATE, SAVE} from '../actions/index'
 
 const initialState = {
   category: [],
@@ -54,6 +54,18 @@ export default (state = initialState, action) => {
       b.click()
       document.body.removeChild(b)
       window.URL.revokeObjectURL(url);
+      return state
+    case UPDATE:
+      new_state = Object.assign({}, state)
+      let item = action.value.path.length === 2 ? new_state.category[action.value.path[0]].sub[action.value.path[1]] : 
+      action.value.path.length === 3 ? new_state.category[action.value.path[0]].sub[action.value.path[1]].sub[action.value.path[2]]
+      : {}
+      item.item_name_e = action.value.item_name_e
+      item.item_name_c = action.value.item_name_c
+      item.price = action.value.price
+      return new_state
+    case SAVE:
+      return state
     default:
       return state
   }

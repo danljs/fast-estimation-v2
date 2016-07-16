@@ -11,7 +11,10 @@ export const
   PRINT = 'PRINT',
   DOWNLOAD = 'DOWNLOAD',
   SELECT = 'SELECT',
-  INPUT = 'INPUT'
+  INPUT = 'INPUT',
+
+  UPDATE = 'UPDATE',
+  SAVE = 'SAVE'
 
 export let change_lang = lang => ({type: CHANGE_LANG, lang})
 export let connecting = () => ({type: CONNECTING})
@@ -49,3 +52,5 @@ export let print = () => (dispatch, getState) => {
 export let download = data => ({type: DOWNLOAD, data})
 export let select = (row_num, col_num, value) => ({type: SELECT, row_num, col_num, value})
 export let input = (row_num, value) => ({type: INPUT, row_num, value})
+export let update = (value) => ({type: UPDATE, value})
+export let save = () => ({type: SAVE})
