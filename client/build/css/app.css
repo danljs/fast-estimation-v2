@@ -170,20 +170,36 @@
   float: right;
   margin: 0px 20px 0px 0px;
 }
-.tree-view {
+.admin {
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  padding-top: 50px;
+}
+.admin .tree-area {
+  height: 98%;
+  width: 300px;
+  overflow-y: auto;
+  padding: 20px;
+  margin: 5px;
+  border: 2px solid lavender;
+  /* style for the children nodes container */
+  /* rotate the triangle to close it */
+}
+.admin .tree-area .tree-view {
   overflow-y: hidden;
 }
-.tree-view_item {
+.admin .tree-area .tree-view_item {
   /* immediate child of .tree-view, for styling convenience */
 }
-/* style for the children nodes container */
-.tree-view_children {
+.admin .tree-area .tree-view_children {
   margin-left: 16px;
 }
-.tree-view_children-collapsed {
+.admin .tree-area .tree-view_children-collapsed {
   height: 0px;
 }
-.tree-view_arrow {
+.admin .tree-area .tree-view_arrow {
   cursor: pointer;
   margin-right: 6px;
   display: inline-block;
@@ -192,17 +208,16 @@
   -ms-user-select: none;
   user-select: none;
 }
-.tree-view_arrow:after {
+.admin .tree-area .tree-view_arrow:after {
   content: '▾';
 }
-/* rotate the triangle to close it */
-.tree-view_arrow-collapsed {
+.admin .tree-area .tree-view_arrow-collapsed {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-.node {
+.admin .tree-area .node {
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   -ms-transition: all 0.5s;
@@ -210,12 +225,12 @@
   transition: all 0.5s;
   border-radius: 3px;
 }
-.node:hover {
+.admin .tree-area .node:hover {
   background-color: #dcf5f3;
   cursor: pointer;
 }
-.info,
-.node {
+.admin .tree-area .info,
+.admin .tree-area .node {
   padding: 2px 10px 2px 5px;
   font: 14px Helvetica, Arial, sans-serif;
   -webkit-user-select: none;
@@ -223,13 +238,19 @@
   -ms-user-select: none;
   user-select: none;
 }
-.tree-view_arrow {
+.admin .tree-area .tree-view_arrow {
   -moz-transition: all 0.1s;
   -o-transition: all 0.1s;
   -ms-transition: all 0.1s;
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
 }
-.tree-view_arrow-empty {
+.admin .tree-area .tree-view_arrow-empty {
   color: yellow;
+}
+.admin .edit-area {
+  position: absolute;
+  top: 50px;
+  left: 300px;
+  padding: 100px;
 }

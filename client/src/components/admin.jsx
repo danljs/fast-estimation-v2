@@ -5,54 +5,36 @@ import { connect } from 'react-redux'
 import * as Actions from '../actions'
 import TreeView from 'react-treeview'
 
-const dataSource = [
-  {
-    type: 'Employees',
-    collapsed: false,
-    people: [
-      {name: 'Paul Gordon', age: 25, sex: 'male', role: 'coder', collapsed: false},
-      {name: 'Sarah Lee', age: 23, sex: 'female', role: 'jqueryer', collapsed: false},
-    ],
-  },
-  {
-    type: 'CEO',
-    collapsed: false,
-    people: [
-      {name: 'Drew Anderson', age: 35, sex: 'male', role: 'boss', collapsed: false},
-    ],
-  },
-]
-
 class admin extends React.Component{
   constructor(props) {
       super(props)
       this.state = {
       }
   }
-  
 
   render() {
-    var lang = this.props.lang.keys
+    const {ui, lang, actions} = this.props
     return (
         <div className='admin'>
-        {dataSource.map((node, i) => {
-          const type = node.type;
-          const label = <span className="node">{type}</span>;
-          return (
-            <TreeView key={type + '|' + i} nodeLabel={label} >
-              {node.people.map(person => {
-                const label2 = <span className="node">{person.name}</span>;
-                return (
-                  <TreeView nodeLabel={label2} key={person.name} >
-                    <div className="info">age: {person.age}</div>
-                    <div className="info">sex: {person.sex}</div>
-                    <div className="info">role: {person.role}</div>
+        <div className='tree-area'>
+        {ui.category.map((node, i) => 
+            <TreeView key={node.item_id + '|' + i} nodeLabel={<span className="node">{node.item_id}</span>} >
+              {node.sub.map(person => 
+                  <TreeView nodeLabel={<span className="node">{person.item_id}</span>} key={person.item_id} >
+                    <div className="info">英文名称: {person.item_name_e}</div>
+                    <div className="info">中文名称: {person.item_name_c}</div>
+                    <div className="info">单价: {person.price}</div>
                   </TreeView>
-                )
-              })}
+              )}
             </TreeView>
-          )
-        })}
+        )}
+      </div>
+      <div className='edit-area'>
+        <div className="info">英文名称: </div>
+        <div className="info">中文名称: </div>
+        <div className="info">单价: </div>
+        <a>保存</a>
+      </div>
       </div>
     )
   }
