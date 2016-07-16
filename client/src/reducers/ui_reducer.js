@@ -1,5 +1,5 @@
 'use strict'
-import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD, UPDATE, SAVE} from '../actions/index'
+import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD, UPDATE} from '../actions/index'
 
 const initialState = {
   category: [],
@@ -64,8 +64,6 @@ export default (state = initialState, action) => {
       item.item_name_c = action.value.item_name_c
       item.price = action.value.price
       return new_state
-    case SAVE:
-      return state
     default:
       return state
   }

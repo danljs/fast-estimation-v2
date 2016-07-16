@@ -80,10 +80,11 @@ class admin extends React.Component{
             <div className="form-group">
               <label htmlFor="input-price" className="col-sm-4 control-label">价格</label>
               <div className="col-sm-8">
-                <input ref="price" type="input" className="form-control" id="input-price" placeholder='价格' value={this.state.price}
+                <input ref="price" type="input" className="form-control" id="input-price" placeholder='价格' value={this.state.price||''}
                 onChange={e => this.setState({price : e.target.value})}/>
               </div>
             </div>
+          
           {/*
             <div className="form-group">
               <label htmlFor="input-image" className="col-sm-4 control-label">图片</label>

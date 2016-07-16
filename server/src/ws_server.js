@@ -22,6 +22,11 @@ module.exports = server => {
         case 'print-request':
           report.create(msg.data, binary => send({type : 'print-response', file: binary, aaa : 'pdfpdfpdf'}))
           break;
+        case 'save-request':
+          fs.writeFile('data/data1.json', JSON.stringify(msg.data), 'utf8', (err) => {
+            if (err) throw err;
+          });
+          break;
         default:
       }
     })
