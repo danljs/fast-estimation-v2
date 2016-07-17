@@ -21,7 +21,7 @@ class admin extends React.Component{
     return (
       <div className='admin'>
         <div className='tree-area'>
-        {ui.category.map((node, i) => 
+        {ui.config.category.map((node, i) => 
             <TreeView key={node.item_id + '|' + i} nodeLabel={<span className="node">{node.item_id}</span>}>
               {node.sub.map((p, j) => 
                   <TreeView nodeLabel={<span className="node" 
@@ -94,16 +94,19 @@ class admin extends React.Component{
             </div>
           */}
             <div className="form-group">
-              <div className="col-sm-4">
+              <div className="col-sm-6">
                 <a className="btn btn-default" onClick={e=>actions.update({
                   path: this.state.path,
                   item_name_c: this.state.item_name_c,
                   item_name_e: this.state.item_name_e,
                   price: this.state.price
-                })}>应用</a>
+                })}>临时保存</a>
               </div>
-              <div className="col-sm-4">
-                <a className="btn btn-default" onClick={e=>actions.save()}>保存</a>
+            </div>
+
+            <div className="form-group">
+              <div className="col-sm-6">
+                <a className="btn btn-default" onClick={e=>actions.save()}>永久保存</a>
               </div>
             </div>
           </form>

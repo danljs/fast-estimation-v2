@@ -24,14 +24,14 @@ export let post_message = message => ({type: POST_MESSAGE,message})
 export let receive_message = message => (dispatch, getState) => {
   switch(message.type){
     case 'json-response':
-      return dispatch(initial(message.data.category))
+      return dispatch(initial(message.data))
     case 'print-response':
       return dispatch(download(message.file.data))
     default:
   }
 }
 
-export let initial = category => ({type: INITIAL, category})
+export let initial = config => ({type: INITIAL, config})
 export let add = () => ({type: ADD})
 export let remove = row_num => ({type: REMOVE, row_num})
 export let print = () => (dispatch, getState) => {
@@ -43,7 +43,7 @@ export let print = () => (dispatch, getState) => {
   }
 
   dispatch(post_message({type:'print-request',data : {
-    title : [...ui.category.map(c => c[lang.item_name]), lang.quatity, lang.amount],
+    title : [...ui.config.category.map(c => c[lang.item_name]), lang.quatity, lang.amount],
     body : ui.rows.map(c => [...c.items.map(d => d[lang.item_name]), c.quatity + '', c.amount]),
     summary: ui.summary
   }}))
@@ -54,6 +54,5 @@ export let select = (row_num, col_num, value) => ({type: SELECT, row_num, col_nu
 export let input = (row_num, value) => ({type: INPUT, row_num, value})
 export let update = (value) => ({type: UPDATE, value})
 export let save = () => (dispatch, getState) => {
-  debugger
-  dispatch(post_message({type:'save-request', data : getState().ui.category}))
+  dispatch(post_message({type:'save-request', data : getState().ui.config}))
 }

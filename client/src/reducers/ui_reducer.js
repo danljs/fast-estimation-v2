@@ -2,7 +2,9 @@
 import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD, UPDATE} from '../actions/index'
 
 const initialState = {
-  category: [],
+  config: {
+    category: []
+  },
   rows: [],
   summary: 0
 }
@@ -12,13 +14,14 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case INITIAL:
       return {
-        category: action.category,
-        rows: [new_row(action.category.length)]
+        config: action.config,
+        rows: [new_row(action.config.category.length)],
+        summary: 0
       }
 
     case ADD:
       new_state = Object.assign({}, state)
-      new_state.rows.push(new_row(state.category.length))
+      new_state.rows.push(new_row(state.config.category.length))
       return new_state
 
     case REMOVE:
@@ -57,8 +60,8 @@ export default (state = initialState, action) => {
       return state
     case UPDATE:
       new_state = Object.assign({}, state)
-      let item = action.value.path.length === 2 ? new_state.category[action.value.path[0]].sub[action.value.path[1]] : 
-      action.value.path.length === 3 ? new_state.category[action.value.path[0]].sub[action.value.path[1]].sub[action.value.path[2]]
+      let item = action.value.path.length === 2 ? new_state.config.category[action.value.path[0]].sub[action.value.path[1]] : 
+      action.value.path.length === 3 ? new_state.config.category[action.value.path[0]].sub[action.value.path[1]].sub[action.value.path[2]]
       : {}
       item.item_name_e = action.value.item_name_e
       item.item_name_c = action.value.item_name_c

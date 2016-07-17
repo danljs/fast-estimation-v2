@@ -16,7 +16,7 @@ class quote_row extends React.Component{
     return (
       <li className='row'>
       {
-        ui.category.map((c,i)=>
+        ui.config.category.map((c,i)=>
           <div key={i} className={'item' + i}>
             <QuoteCell subs={c.sub} row_num={row_num} col_num={i}/>
           </div>

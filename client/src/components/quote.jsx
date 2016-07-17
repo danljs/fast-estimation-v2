@@ -24,7 +24,7 @@ class quote extends React.Component{
         <section className='main'><ul>
           <li className='row title'>
           {
-            ui.category.map((c,i)=><div key={i} className={'item' + i}>{c[lang.item_name]}</div>)
+            ui.config.category.map((c,i)=><div key={i} className={'item' + i}>{c[lang.item_name]}</div>)
           }
           <div className='quatity'>{lang.quatity}</div>
           <div className='amount'>{lang.amount}</div>
