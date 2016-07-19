@@ -60,9 +60,19 @@ export default (state = initialState, action) => {
       return state
     case UPDATE:
       new_state = Object.assign({}, state)
-      let item = action.value.path.length === 2 ? new_state.config.category[action.value.path[0]].sub[action.value.path[1]] : 
-      action.value.path.length === 3 ? new_state.config.category[action.value.path[0]].sub[action.value.path[1]].sub[action.value.path[2]]
-      : {}
+      let item = {}
+      switch (action.value.path.length) {
+        case 1:
+          item = new_state.config.category[action.value.path[0]] 
+          break
+        case 2:
+          item = new_state.config.category[action.value.path[0]].sub[action.value.path[1]] 
+          break
+        case 3:
+          item = new_state.config.category[action.value.path[0]].sub[action.value.path[1]].sub[action.value.path[2]]
+          break
+        default:
+      }
       item.item_name_e = action.value.item_name_e
       item.item_name_c = action.value.item_name_c
       item.price = action.value.price

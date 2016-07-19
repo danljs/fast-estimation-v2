@@ -22,43 +22,45 @@ class admin extends React.Component{
       <div className='admin'>
         <div className='tree-area'>
         {ui.config.category.map((node, i) => 
-            <TreeView key={node.item_id + '|' + i} nodeLabel={<span className="node">{node.item_id}</span>}>
-              {node.sub.map((p, j) => 
-                  <TreeView nodeLabel={<span className="node" 
-                    onClick={e => this.setState({
-                      item_name_e : p.item_name_e, 
-                      item_name_c : p.item_name_c, 
-                      price : p.price,
-                      path : [i, j]
-                    })}>
-                    {p.item_id}</span>} key={p.item_id} >
-                    {
-                      !!!p.sub ? 
-                      <div>
-                        <div className="info">英文名称: {p.item_name_e}</div>
-                        <div className="info">中文名称: {p.item_name_c}</div>
-                        <div className="info">单价: {p.price}</div>
-                      </div>
-                      :
-                      p.sub.map((s, k) => 
-                        <TreeView nodeLabel={<span className="node" 
-                          onClick={e => this.setState({
-                            item_name_e : s.item_name_e, 
-                            item_name_c : s.item_name_c, 
-                            price : s.price,
-                            path : [i, j, k]
-                          })}>
-                          {s.item_id}</span>} key={s.item_id}> 
-                          
-                          <div className="info">英文名称: {s.item_name_e}</div>
-                          <div className="info">中文名称: {s.item_name_c}</div>
-                          <div className="info">单价: {s.price}</div>
-                        </TreeView>
-                      )
-                    }
-                  </TreeView>
-              )}
-            </TreeView>
+          <TreeView key={node.item_id + '|' + i} nodeLabel={<span className="node"
+            onClick={e => this.setState({
+              item_name_e : node.item_name_e, 
+              item_name_c : node.item_name_c, 
+              price : node.price,
+              path : [i]
+            })}>{node.item_id}</span>}>
+            <div className="info">英文名称: {node.item_name_e}</div>
+            <div className="info">中文名称: {node.item_name_c}</div>
+            {node.sub.map((p, j) => 
+                <TreeView nodeLabel={<span className="node" 
+                  onClick={e => this.setState({
+                    item_name_e : p.item_name_e, 
+                    item_name_c : p.item_name_c, 
+                    price : p.price,
+                    path : [i, j]
+                  })}> {p.item_id}</span>} key={p.item_id} >
+                  <div className="info">英文名称: {p.item_name_e}</div>
+                  <div className="info">中文名称: {p.item_name_c}</div>
+                  { 
+                    !!!p.sub ? <div className="info">单价: {p.price}</div> :
+                    p.sub.map((s, k) => 
+                      <TreeView nodeLabel={<span className="node" 
+                        onClick={e => this.setState({
+                          item_name_e : s.item_name_e, 
+                          item_name_c : s.item_name_c, 
+                          price : s.price,
+                          path : [i, j, k]
+                        })}> {s.item_id}</span>} key={s.item_id}> 
+                        
+                        <div className="info">英文名称: {s.item_name_e}</div>
+                        <div className="info">中文名称: {s.item_name_c}</div>
+                        <div className="info">单价: {s.price}</div>
+                      </TreeView>
+                    )
+                  }
+                </TreeView>
+            )}
+          </TreeView>
         )}
         </div>
         <div className='edit-area'>
