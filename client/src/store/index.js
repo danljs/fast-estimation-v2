@@ -26,8 +26,8 @@ export default (()=>{
 
   !!websocket && websocket.readyState === websocket.OPEN ? websocket.close() : ''
   store.dispatch(connecting())
-  // websocket = new WebSocket("wss://" + window.location.hostname + ':8443')
-  websocket = new WebSocket("ws://" + window.location.hostname + ':8443')
+  
+  websocket = new WebSocket(`ws${!!!module.hot ? 's' : ''}${'://' + window.location.hostname}:8443`)
 
   websocket.onmessage = event => store.dispatch(receive_message(JSON.parse(event.data)))
   websocket.onopen = () => {
