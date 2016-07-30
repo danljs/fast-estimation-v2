@@ -249,10 +249,16 @@
 }
 .admin .edit-area {
   position: absolute;
-  top: 50px;
+  top: 0px;
   left: 300px;
   padding: 30px;
+  right: 0px;
 }
 .admin .edit-area a {
   float: right;
+}
+.report {
+  width: 100%;
+  position: absolute;
+  left: 0px;
 }

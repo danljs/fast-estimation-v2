@@ -1,5 +1,5 @@
 'use strict'
-import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD, UPDATE} from '../actions/index'
+import { INITIAL, ADD, REMOVE, PRINT, SELECT, INPUT, DOWNLOAD, UPDATE, UPDATE_REPORT} from '../actions/index'
 
 const initialState = {
   config: {
@@ -76,6 +76,10 @@ export default (state = initialState, action) => {
       item.item_name_e = action.value.item_name_e
       item.item_name_c = action.value.item_name_c
       item.price = action.value.price
+      return new_state
+    case UPDATE_REPORT:
+      new_state = Object.assign({}, state)
+      new_state.config.contract = action.value
       return new_state
     default:
       return state

@@ -18,5 +18,6 @@ module.exports = {
 	item_name: 'item_name_e',
 	what: 'What needs to be done?',
 	select: 'Select...',
-	please_input: 'please select all of items.'
+	please_input: 'please select all of items.',
+	report: 'report'
 }

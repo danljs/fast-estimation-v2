@@ -12,7 +12,16 @@ class admin extends React.Component{
         item_name_e: '',
         item_name_c: '',
         price: '',
-        path: ''
+        path: '',
+
+        before_c: '',
+        before_e: '',
+        after_c: '',
+        after_e: '',
+        company_c: '',
+        company_e: '',
+        subject_c: '',
+        subject_e: ''
       }
   }
 
@@ -66,27 +75,28 @@ class admin extends React.Component{
         <div className='edit-area'>
           <form className="form-horizontal">
             <div className="form-group">
-              <label htmlFor="input-name-e" className="col-sm-4 control-label">英文名称</label>
-              <div className="col-sm-8">
+              <label htmlFor="input-name-e" className="col-sm-3 control-label">英文名称</label>
+              <div className="col-sm-9">
                 <input ref="name-e" type="input" className="form-control" id="input-name-e" placeholder='英文名称' value={this.state.item_name_e}
                 onChange={e => this.setState({item_name_e : e.target.value})}/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="input-name-c" className="col-sm-4 control-label">中文名称</label>
-              <div className="col-sm-8">
+              <label htmlFor="input-name-c" className="col-sm-3 control-label">中文名称</label>
+              <div className="col-sm-9">
                 <input ref="name-c" type="input" className="form-control" id="input-name-c" placeholder='中文名称' value={this.state.item_name_c}
                 onChange={e => this.setState({item_name_c : e.target.value})}/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="input-price" className="col-sm-4 control-label">价格</label>
-              <div className="col-sm-8">
+              <label htmlFor="input-price" className="col-sm-3 control-label">价格</label>
+              <div className="col-sm-9">
                 <input ref="price" type="input" className="form-control" id="input-price" placeholder='价格' value={this.state.price||''}
                 onChange={e => this.setState({price : e.target.value})}/>
               </div>
             </div>
-          
+            <hr/>
+            
           {/*
             <div className="form-group">
               <label htmlFor="input-image" className="col-sm-4 control-label">图片</label>
@@ -96,7 +106,8 @@ class admin extends React.Component{
             </div>
           */}
             <div className="form-group">
-              <div className="col-sm-6">
+              <div className="col-sm-3"/>
+              <div className="col-sm-3">
                 <a className="btn btn-default" onClick={e=>actions.update({
                   path: this.state.path,
                   item_name_c: this.state.item_name_c,
@@ -104,10 +115,8 @@ class admin extends React.Component{
                   price: this.state.price
                 })}>临时保存</a>
               </div>
-            </div>
 
-            <div className="form-group">
-              <div className="col-sm-6">
+              <div className="col-sm-3">
                 <a className="btn btn-default" onClick={e=>actions.save()}>永久保存</a>
               </div>
             </div>

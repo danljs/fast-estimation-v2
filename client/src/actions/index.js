@@ -14,7 +14,8 @@ export const
   INPUT = 'INPUT',
 
   UPDATE = 'UPDATE',
-  SAVE = 'SAVE'
+  SAVE = 'SAVE',
+  UPDATE_REPORT = 'UPDATE_REPORT'
 
 export let change_lang = lang => ({type: CHANGE_LANG, lang})
 export let connecting = () => ({type: CONNECTING})
@@ -43,6 +44,9 @@ export let print = () => (dispatch, getState) => {
   }
 
   dispatch(post_message({type:'print-request',data : {
+    subject : '',
+    before : '',
+    after : '',
     title : [...ui.config.category.map(c => c[lang.item_name]), lang.quatity, lang.amount],
     body : ui.rows.map(c => [...c.items.map(d => d[lang.item_name]), c.quatity + '', c.amount]),
     summary: lang.summary + ':' + ui.summary
@@ -56,3 +60,4 @@ export let update = (value) => ({type: UPDATE, value})
 export let save = () => (dispatch, getState) => {
   dispatch(post_message({type:'save-request', data : getState().ui.config}))
 }
+export let update_report = (value) => ({type: UPDATE_REPORT, value})
