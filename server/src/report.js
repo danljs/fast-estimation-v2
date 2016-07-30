@@ -22,6 +22,8 @@ module.exports = ( () => {
           bold: 'font/msyh.ttf'
         }
       }
+      var widths = [60, 60, 80, 60, 60, 60, '*']
+      var alignment = ['left','left','left','left','left','right','right']
 
       var doc_def = { 
         content: [
@@ -30,12 +32,14 @@ module.exports = ( () => {
           {
             style: 'tableExample',
             table: {
+              widths: widths,
               body: [
                 data.title.map(c => ({ text: c, style: 'tableHeader', alignment: 'center' })), 
-                ...data.body
+                ...data.body.map(c =>c.map((d,i)=>({text: d, style: 'tableHeader', alignment:  alignment[i]})))
               ]
             }
           },
+          { text: data.summary, style: 'header', alignment:  'right' },
         ],
         styles: {
           header: {
