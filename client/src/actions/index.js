@@ -44,9 +44,10 @@ export let print = () => (dispatch, getState) => {
   }
 
   dispatch(post_message({type:'print-request',data : {
-    subject : '',
-    before : '',
-    after : '',
+    contract : {
+      before: ui.config.contract.before[lang.item_name],
+      after: ui.config.contract.after[lang.item_name]
+    },
     title : [...ui.config.category.map(c => c[lang.item_name]), lang.quatity, lang.amount],
     body : ui.rows.map(c => [...c.items.map(d => d[lang.item_name]), c.quatity + '', c.amount]),
     summary: lang.summary + ':' + ui.summary

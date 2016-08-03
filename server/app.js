@@ -4,7 +4,7 @@ let http        = require('http'),
     path          = require('path'),
     contentTypes  = require('./utils/content-types'),
     sysInfo       = require('./utils/sys-info'),
-    report = require('./src/report'),
+    // report = require('./src/report'),
     wss           = require('./src/ws_server')
 
 
@@ -24,7 +24,7 @@ let server = http.createServer((req, res) => {
       res.end(JSON.stringify(sysInfo[url.slice(6)]()));
       break;
     case '/pdf':
-      report.create(req.data, binary => res.end(binary), error => res.send('ERROR:' + error))
+      // report.create(req.data, binary => res.end(binary), error => res.send('ERROR:' + error))
 
       // let tmp_dir = __dirname + '/tmp';
       // !!!fs.existsSync(tmp_dir) ? fs.mkdirSync(tmp_dir) : ''
