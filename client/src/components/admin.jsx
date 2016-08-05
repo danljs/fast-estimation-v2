@@ -13,15 +13,7 @@ class admin extends React.Component{
         item_name_c: '',
         price: '',
         path: '',
-
-        before_c: '',
-        before_e: '',
-        after_c: '',
-        after_e: '',
-        company_c: '',
-        company_e: '',
-        subject_c: '',
-        subject_e: ''
+        price_valid: true
       }
   }
 
@@ -36,7 +28,8 @@ class admin extends React.Component{
               item_name_e : node.item_name_e, 
               item_name_c : node.item_name_c, 
               price : node.price,
-              path : [i]
+              path : [i],
+              price_valid : !!!node.sub
             })}>{node.item_id}</span>}>
             <div className="info">英文名称: {node.item_name_e}</div>
             <div className="info">中文名称: {node.item_name_c}</div>
@@ -46,7 +39,8 @@ class admin extends React.Component{
                     item_name_e : p.item_name_e, 
                     item_name_c : p.item_name_c, 
                     price : p.price,
-                    path : [i, j]
+                    path : [i, j],
+                    price_valid : !!!p.sub
                   })}> {p.item_id}</span>} key={p.item_id} >
                   <div className="info">英文名称: {p.item_name_e}</div>
                   <div className="info">中文名称: {p.item_name_c}</div>
@@ -58,7 +52,8 @@ class admin extends React.Component{
                           item_name_e : s.item_name_e, 
                           item_name_c : s.item_name_c, 
                           price : s.price,
-                          path : [i, j, k]
+                          path : [i, j, k],
+                          price_valid : true
                         })}> {s.item_id}</span>} key={s.item_id}> 
                         
                         <div className="info">英文名称: {s.item_name_e}</div>
@@ -91,7 +86,7 @@ class admin extends React.Component{
             <div className="form-group">
               <label htmlFor="input-price" className="col-sm-3 control-label">价格</label>
               <div className="col-sm-9">
-                <input ref="price" type="input" className="form-control" id="input-price" placeholder='价格' value={this.state.price||''}
+                <input ref="price" type="input" className="form-control" id="input-price" placeholder='价格' disabled={!this.state.price_valid} value={this.state.price||''}
                 onChange={e => this.setState({price : e.target.value})}/>
               </div>
             </div>
