@@ -2,7 +2,7 @@
 
 let WSServer  = require('ws').Server,
     fs        = require('fs'),
-    report    = require('./report_ls'),
+    report    = require('./report'),
     wss       = {}
 
 module.exports = server => {

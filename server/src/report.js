@@ -1,7 +1,8 @@
 "use strict"
 
 let pdfmaker  = require('pdfmake/src/printer')
-// const linebreak = require('linebreak')
+let os = require('os')
+let vw = require('visualwidth')
 
 module.exports = ( () => {
 	var createPdfBinary = (font_desc, pdfDoc, callback) => {
@@ -13,28 +14,30 @@ module.exports = ( () => {
     doc.on('end', () => callback(Buffer.concat(chunks)))
     doc.end()
   }
-  // var lenOfString = str => str.replace(/[\u0391-\uFFE5]/g,"aa").length
 
-  // var font = { fontSize: 12, bold: false, italics: false, font: 'Helvetica' }
-  // var sizeOfString = text => text.length * font.fontSize * (font.bold ? 1.5 : 1) * (font.italics ? 1.1 : 1)
-  // console.log(lenOfString('hj六'))
+  function writeLines(line, width) {
+	  var divided = divideLine(line, width), out = []
+	  divided.lines.map(function(l) {
+	    out.push(l + os.EOL)
+	  })
+	  if (divided.tail.length > 0) out.push(divided.tail + os.EOL)
+	  return out
+	}
 
-  // var lorem = '中文表后中文表后中文表后中文表后';
-  // // var lorem = 'lorem ipsum...';
-  // var breaker = new linebreak(lorem);
-  // var last = 0;
-  // var bk;
-
-  // while (bk = breaker.nextBreak()) {
-  //   // get the string between the last break and this one
-  //   var word = lorem.slice(last, bk.position);
-  //   console.log(word);
-
-  //   // you can also check bk.required to see if this was a required break...
-  //   if (bk.required) {
-  //     console.log('\n\n');
-  //   }
-  // }
+	function divideLine(line, width) {
+	  var out = {
+	    lines: [],
+	    tail: ''
+	  }
+	  var head
+	  while (line.length > 0) {
+	    head = vw.truncate(line, width, '')
+	    line = line.slice(head.length)
+	    out.lines.push(head)
+	    out.tail = line
+	  }
+	  return out
+	}
 
 return {
   create: (data, callback) => {
@@ -50,7 +53,7 @@ return {
     var doc_def = { 
       content: [
         { text: 'Tables', style: 'header' },
-        data.contract.before,
+        data.lang === 'en' ? data.contract.before : writeLines(data.contract.before,80),
         {
           style: 'tableExample',
           table: {
@@ -62,7 +65,7 @@ return {
           }
         },
         { text: data.summary, style: 'header', alignment:  'right' },
-        data.contract.after,
+        data.lang === 'en' ? data.contract.after : writeLines(data.contract.after,80),
       ],
       styles: {
         header: {
