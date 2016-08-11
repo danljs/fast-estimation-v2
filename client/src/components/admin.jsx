@@ -70,22 +70,22 @@ class admin extends React.Component{
         <div className='edit-area'>
           <form className="form-horizontal">
             <div className="form-group">
-              <label htmlFor="input-name-e" className="col-sm-3 control-label">英文名称</label>
-              <div className="col-sm-9">
+              <label htmlFor="input-name-e" className="col-sm-12">英文名称</label>
+              <div className="col-sm-12">
                 <input ref="name-e" type="input" className="form-control" id="input-name-e" placeholder='英文名称' value={this.state.item_name_e}
                 onChange={e => this.setState({item_name_e : e.target.value})}/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="input-name-c" className="col-sm-3 control-label">中文名称</label>
-              <div className="col-sm-9">
+              <label htmlFor="input-name-c" className="col-sm-12">中文名称</label>
+              <div className="col-sm-12">
                 <input ref="name-c" type="input" className="form-control" id="input-name-c" placeholder='中文名称' value={this.state.item_name_c}
                 onChange={e => this.setState({item_name_c : e.target.value})}/>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="input-price" className="col-sm-3 control-label">价格</label>
-              <div className="col-sm-9">
+              <label htmlFor="input-price" className="col-sm-12">价格</label>
+              <div className="col-sm-12">
                 <input ref="price" type="input" className="form-control" id="input-price" placeholder='价格' disabled={!this.state.price_valid} value={this.state.price||''}
                 onChange={e => this.setState({price : e.target.value})}/>
               </div>
@@ -101,7 +101,6 @@ class admin extends React.Component{
             </div>
           */}
             <div className="form-group">
-              <div className="col-sm-3"/>
               <div className="col-sm-3">
                 <a className="btn btn-default" onClick={e=>actions.update({
                   path: this.state.path,
