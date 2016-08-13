@@ -15,7 +15,8 @@ export const
 
   UPDATE = 'UPDATE',
   SAVE = 'SAVE',
-  UPDATE_REPORT = 'UPDATE_REPORT'
+  UPDATE_REPORT = 'UPDATE_REPORT',
+  SAVE_REPORT = 'SAVE_REPORT'
 
 export let change_lang = lang => ({type: CHANGE_LANG, lang})
 export let connecting = () => ({type: CONNECTING})
@@ -46,8 +47,8 @@ export let print = () => (dispatch, getState) => {
   dispatch(post_message({type:'print-request',data : {
     lang: lang.id,
     contract : {
-      before: ui.config.contract.before[lang.item_name],
-      after: ui.config.contract.after[lang.item_name]
+      before: ui.config.contract[lang.item_name].before,
+      after: ui.config.contract[lang.item_name].after
     },
     title : [...ui.config.category.map(c => c[lang.item_name]), lang.quatity, lang.amount],
     body : ui.rows.map(c => [...c.items.map(d => d[lang.item_name]), c.quatity + '', c.amount]),

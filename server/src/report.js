@@ -53,7 +53,8 @@ return {
     var doc_def = { 
       content: [
         { text: 'Tables', style: 'header' },
-        data.lang === 'en' ? data.contract.before : writeLines(data.contract.before,80),
+        // writeLines(data.contract.before,86),
+        data.lang === 'en' ? data.contract.before : writeLines(data.contract.before,86),
         {
           style: 'tableExample',
           table: {
@@ -65,7 +66,8 @@ return {
           }
         },
         { text: data.summary, style: 'header', alignment:  'right' },
-        data.lang === 'en' ? data.contract.after : writeLines(data.contract.after,80),
+        // writeLines(data.contract.after,86),
+        data.lang === 'en' ? data.contract.after : writeLines(data.contract.after,86),
       ],
       styles: {
         header: {
