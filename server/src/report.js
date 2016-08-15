@@ -56,6 +56,7 @@ return {
         { text: data.contract.subject, style: 'header', alignment: 'center' },
         // writeLines(data.contract.before,86),
         data.lang === 'en' ? data.contract.before : writeLines(data.contract.before, 86),
+        { text: '', style: 'header', alignment: 'center' },
         {
           style: 'tableExample',
           table: {
@@ -68,6 +69,7 @@ return {
         },
         { text: data.summary, style: 'header', alignment:  'right' },
         // writeLines(data.contract.after,86),
+        { text: '', style: 'header', alignment: 'center' },
         data.lang === 'en' ? data.contract.after : writeLines(data.contract.after, 86),
       ],
       styles: {
