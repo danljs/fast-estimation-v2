@@ -47,6 +47,8 @@ export let print = () => (dispatch, getState) => {
   dispatch(post_message({type:'print-request',data : {
     lang: lang.id,
     contract : {
+      company: ui.config.contract[lang.item_name].company,
+      subject: ui.config.contract[lang.item_name].subject,
       before: ui.config.contract[lang.item_name].before,
       after: ui.config.contract[lang.item_name].after
     },

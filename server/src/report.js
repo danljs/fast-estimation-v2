@@ -52,22 +52,23 @@ return {
 
     var doc_def = { 
       content: [
-        { text: 'Tables', style: 'header' },
+        { text: data.contract.company, style: 'tableHeader', alignment: 'right' },
+        { text: data.contract.subject, style: 'header', alignment: 'center' },
         // writeLines(data.contract.before,86),
-        data.lang === 'en' ? data.contract.before : writeLines(data.contract.before,86),
+        data.lang === 'en' ? data.contract.before : writeLines(data.contract.before, 86),
         {
           style: 'tableExample',
           table: {
             widths: widths,
             body: [
               data.title.map(c => ({ text: c, style: 'tableHeader', alignment: 'center' })), 
-              ...data.body.map(c => c.map((d,i) => ({text: d, style: 'tableHeader', alignment:  alignment[i]})))
+              ...data.body.map(c => c.map((d,i) => ({text: d, style: 'tableHeader', alignment: alignment[i]})))
             ]
           }
         },
         { text: data.summary, style: 'header', alignment:  'right' },
         // writeLines(data.contract.after,86),
-        data.lang === 'en' ? data.contract.after : writeLines(data.contract.after,86),
+        data.lang === 'en' ? data.contract.after : writeLines(data.contract.after, 86),
       ],
       styles: {
         header: {

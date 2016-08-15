@@ -6,6 +6,8 @@ import { render } from 'react-dom'
 
 import { Provider } from 'react-redux'
 import {Router, Route, IndexRoute, useRouterHistory} from 'react-router'
+import { syncHistoryWithStore} from 'react-router-redux'
+
 import { createHashHistory } from 'history'
 
 import Header from './components/header'
@@ -25,10 +27,11 @@ class app extends React.Component{
       )
 	}
 }
+const history = syncHistoryWithStore(useRouterHistory(createHashHistory)({ queryKey: false }), store)
 
 render(
     <Provider store={store}>
-      <Router history={useRouterHistory(createHashHistory)({ queryKey: false })}>
+      <Router history={history}>
         <Route path="/" component={app}>
           <IndexRoute component={quote} />
           <Route path="quote" component={quote}/>

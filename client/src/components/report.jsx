@@ -18,8 +18,10 @@ class report extends React.Component{
         subject_e: ''
       }
   }
-
+  
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps')
+    
     const contract = nextProps.ui.config.contract ||{}
     this.setState({
       company_c: contract.item_name_c.company,
