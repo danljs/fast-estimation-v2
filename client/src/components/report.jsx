@@ -18,11 +18,23 @@ class report extends React.Component{
         subject_e: ''
       }
   }
-  
+  componentWillMount(){
+    this.handle_load(this.props)
+  }
+  // componentDidMount(){
+  // }
+  // componentWillUpdate(nextProps, nextState){
+  // }
+  // componentDidUpdate(prevProps, prevState){
+  // }
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps')
+    this.handle_load(nextProps)
+  }
+
+  handle_load(props){
+    const contract = props.ui.config.contract
+    if(!!!contract) return
     
-    const contract = nextProps.ui.config.contract ||{}
     this.setState({
       company_c: contract.item_name_c.company,
       subject_c: contract.item_name_c.subject,
@@ -34,7 +46,6 @@ class report extends React.Component{
       after_e: contract.item_name_e.after
     })
   }
-
   render() {
     const actions = this.props.actions
     return (
