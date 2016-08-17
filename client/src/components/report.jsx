@@ -32,9 +32,8 @@ class report extends React.Component{
   }
 
   handle_load(props){
-    const contract = props.ui.config.contract
-    if(!!!contract) return
-    
+    let contract = props.ui.config.contract
+    !!!contract ? '' :
     this.setState({
       company_c: contract.item_name_c.company,
       subject_c: contract.item_name_c.subject,
