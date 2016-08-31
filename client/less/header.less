@@ -1,14 +1,22 @@
 .header-area{
 	padding: 5px 30px 45px ;
-	a{
+	div{
 		float: right;
-		width: 120px;
-		height: 40px;
-		margin-left: 1px;
-		font-size: 24px;
-		font-family: inherit;
-		font-weight: inherit;
-		line-height: 1.4em;
-		cursor: pointer;
+		a{
+			width: 120px;
+			height: 40px;
+			margin-right: 20px;
+			margin-left: 20px;
+			font-size: 24px;
+			font-family: inherit;
+			font-weight: inherit;
+			line-height: 1.4em;
+			cursor: pointer;
+			&.selected{
+				font-size: 32px;
+				pointer-events: none; 
+				color: red;
+			}
+		}
 	}
 }
