@@ -1,18 +1,18 @@
 'use strict'
-let http        = require('http'),
-    fs            = require('fs'),
-    path          = require('path'),
-    contentTypes  = require('./utils/content-types'),
-    sysInfo       = require('./utils/sys-info'),
-    // report = require('./src/report'),
-    wss           = require('./src/ws_server')
+const http = require('http')
+const fs = require('fs')
+const path = require('path')
+const contentTypes = require('./utils/content-types')
+const sysInfo = require('./utils/sys-info')
+// report = require('./src/report'),
+const wss = require('./src/ws_server')
 
 
-let server = http.createServer((req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*")
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+const server = http.createServer((req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   let url = req.url;
-  switch(url){
+  switch (url) {
     case '/health':
       res.writeHead(200);
       res.end();
@@ -47,7 +47,7 @@ let server = http.createServer((req, res) => {
           res.writeHead(404);
           res.end('Not found');
         } else {
-          let ext = path.extname(url).slice(1);
+          const ext = path.extname(url).slice(1);
           res.setHeader('Content-Type', contentTypes[ext]);
           if (ext === 'html') {
             res.setHeader('Cache-Control', 'no-cache, no-store');
@@ -59,7 +59,7 @@ let server = http.createServer((req, res) => {
 });
 
 wss(server)
-let port = process.env.NODE_PORT || 3000
+const port = process.env.NODE_PORT || 3000
 server.listen(port, process.env.NODE_IP || 'localhost', () => {
   console.log(`Application worker ${process.pid} started at ${port}...`);
 });
