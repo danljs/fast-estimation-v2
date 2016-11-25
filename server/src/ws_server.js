@@ -33,7 +33,7 @@ module.exports = server => {
     ws.on('close', () => console.log('A ws client disconnected.'))
     ws.on('error', () => console.log(e))
     let send = (msg, cb) => {
-      cb = cb || () => {}
+      cb = cb || function(){}
       ws.send(JSON.stringify(msg), err => ws.readyState === 3 ? cb() : cb(err))
     }
     let broadcast = msg => wss.clients.map( c => c.send(JSON.stringify(msg)))

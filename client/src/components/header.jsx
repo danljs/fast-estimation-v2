@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from '../actions'
-import {withRouter, browserHistory} from 'react-router'
+import {withRouter} from 'react-router'
 
 class header extends React.Component{
   constructor(props) {

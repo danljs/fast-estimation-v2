@@ -98,4 +98,4 @@ return {
     createPdfBinary(font_desc, doc_def, callback)
   }
 }
-}())
+})()
